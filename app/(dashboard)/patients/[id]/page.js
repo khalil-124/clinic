@@ -253,6 +253,7 @@ export default function PatientProfilePage({ params }) {
   const [appointments, setAppointments] = useState([]);
   const [treatmentPlans, setTreatmentPlans] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
   const [activeTab, setActiveTab] = useState('visits');
   const [editingMedical, setEditingMedical] = useState(false);
   const [showAddTreatment, setShowAddTreatment] = useState(false);
@@ -366,6 +367,7 @@ export default function PatientProfilePage({ params }) {
 
 
   async function loadData() {
+    setError('');
     try {
       const [p, apts, plans] = await Promise.all([
         getPatient(id),
@@ -387,6 +389,7 @@ export default function PatientProfilePage({ params }) {
       setMedNotes(mh.notes || '');
     } catch (err) {
       console.error(err);
+      setError('حدث خطأ أثناء تحميل بيانات المريض: ' + err.message);
     } finally {
       setLoading(false);
     }
@@ -740,6 +743,19 @@ export default function PatientProfilePage({ params }) {
       <div className="loading-spinner">
         <div className="spinner" />
         <p className="text-muted">جاري تحميل ملف المريض...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="card" style={{ padding: 40, textAlign: 'center', margin: '40px auto', maxWidth: 500 }}>
+        <div style={{ fontSize: 48, marginBottom: 16 }}>⚠️</div>
+        <h3 style={{ color: 'var(--danger)', marginBottom: 12 }}>فشل تحميل ملف المريض</h3>
+        <p className="text-muted" style={{ marginBottom: 20 }}>{error}</p>
+        <button className="btn btn-primary" onClick={loadData}>
+          🔄 إعادة المحاولة
+        </button>
       </div>
     );
   }
