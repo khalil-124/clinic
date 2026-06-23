@@ -8,6 +8,12 @@ import styles from './book.module.css';
 
 const SpeechRecognition = typeof window !== 'undefined' && (window.SpeechRecognition || window.webkitSpeechRecognition);
 
+function timeToMinutes(timeStr) {
+  if (!timeStr) return 0;
+  const [hours, minutes] = timeStr.split(':').map(Number);
+  return hours * 60 + minutes;
+}
+
 function PatientBookingForm() {
   const router = useRouter();
 
@@ -89,9 +95,7 @@ function PatientBookingForm() {
 
   async function loadBookedTimes(selectedDate) {
     const appointments = await getAppointmentsByDate(selectedDate);
-    const booked = appointments
-      .filter(a => a.status !== 'cancelled')
-      .map(a => a.time);
+    const booked = appointments.filter(a => a.status !== 'cancelled');
     setBookedTimes(booked);
   }
 
@@ -237,7 +241,14 @@ function PatientBookingForm() {
               <div className={styles.timeGrid}>
                 {timeSlots.length === 0 ? <p className="text-muted">جاري تحميل الأوقات...</p> : null}
                 {timeSlots.map((slot) => {
-                  const isBooked = bookedTimes.includes(slot);
+                  const isBooked = bookedTimes.some(appt => {
+                    const slotStart = timeToMinutes(slot);
+                    const slotDuration = settings?.appointmentDuration || 30;
+                    const slotEnd = slotStart + slotDuration;
+                    const apptStart = timeToMinutes(appt.time);
+                    const apptEnd = apptStart + (parseInt(appt.duration) || 30);
+                    return slotStart < apptEnd && apptStart < slotEnd;
+                  });
                   return (
                     <button
                       key={slot}
