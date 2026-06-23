@@ -4,16 +4,10 @@ import { useState, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { addPatient, addAppointment, searchPatients, getAppointmentsByDate, getSettings, getPatient } from '@/lib/firestore';
 import { useAuth } from '@/contexts/AuthContext';
-import { generateTimeSlots, formatTime, getToday, VISIT_TYPES, getDayName } from '@/lib/utils';
+import { generateTimeSlots, formatTime, getToday, VISIT_TYPES, getDayName, generateDynamicSlots } from '@/lib/utils';
 import styles from './booking.module.css';
 
 const SpeechRecognition = typeof window !== 'undefined' && (window.SpeechRecognition || window.webkitSpeechRecognition);
-
-function timeToMinutes(timeStr) {
-  if (!timeStr) return 0;
-  const [hours, minutes] = timeStr.split(':').map(Number);
-  return hours * 60 + minutes;
-}
 
 function BookingForm() {
   const { user } = useAuth();
@@ -116,11 +110,22 @@ function BookingForm() {
     }
   }, [date, settings]);
 
+  useEffect(() => {
+    if (settings) {
+      const slots = generateDynamicSlots(
+        settings.workHoursStart || '09:00',
+        settings.workHoursEnd || '17:00',
+        duration || 30,
+        bookedTimes
+      );
+      setTimeSlots(slots);
+    }
+  }, [bookedTimes, settings, duration]);
+
   async function loadSettings() {
     const s = await getSettings();
     setSettings(s);
     setDuration(s.appointmentDuration || 30);
-    setTimeSlots(generateTimeSlots(s.workHoursStart || '09:00', s.workHoursEnd || '17:00', s.appointmentDuration || 30));
   }
 
   async function loadBookedTimes(selectedDate) {
@@ -456,23 +461,16 @@ function BookingForm() {
                 <label className="form-label">اختر الوقت *</label>
                 <div className={styles.timeGrid}>
                   {timeSlots.map((slot) => {
-                    const isBooked = bookedTimes.some(appt => {
-                      const slotStart = timeToMinutes(slot);
-                      const slotDuration = duration || 30;
-                      const slotEnd = slotStart + slotDuration;
-                      const apptStart = timeToMinutes(appt.time);
-                      const apptEnd = apptStart + (parseInt(appt.duration) || 30);
-                      return slotStart < apptEnd && apptStart < slotEnd;
-                    });
                     return (
                       <button
-                        key={slot}
+                        key={slot.time}
                         type="button"
-                        className={`${styles.timeSlot} ${time === slot ? styles.timeSlotSelected : ''} ${isBooked ? styles.timeSlotBooked : ''}`}
-                        onClick={() => !isBooked && setTime(slot)}
-                        disabled={isBooked}
+                        className={`${styles.timeSlot} ${time === slot.time ? styles.timeSlotSelected : ''} ${slot.isBooked ? styles.timeSlotBooked : ''}`}
+                        onClick={() => !slot.isBooked && setTime(slot.time)}
+                        disabled={slot.isBooked}
                       >
-                        {formatTime(slot)}
+                        {formatTime(slot.time)}
+                        {!slot.isBooked && <span style={{fontSize: '9px', opacity: 0.7, display: 'block'}}>({slot.duration} د)</span>}
                       </button>
                     );
                   })}
