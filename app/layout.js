@@ -1,6 +1,7 @@
 import { Cairo } from 'next/font/google';
 import './globals.css';
 import { AuthProvider } from '@/contexts/AuthContext';
+import PWAInstallBanner from '@/components/PWAInstallBanner';
 
 const cairo = Cairo({
   subsets: ['arabic', 'latin'],
@@ -18,6 +19,7 @@ export default function RootLayout({ children }) {
       <body>
         <AuthProvider>
           {children}
+          <PWAInstallBanner />
         </AuthProvider>
       </body>
     </html>
