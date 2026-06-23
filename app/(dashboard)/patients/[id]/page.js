@@ -244,7 +244,8 @@ function ToothIcon({ type, status, isUpper }) {
 }
 
 export default function PatientProfilePage({ params }) {
-  const { id } = use(params);
+  const resolvedParams = params && typeof params.then === 'function' ? use(params) : params;
+  const id = resolvedParams?.id;
   const { user } = useAuth();
   const router = useRouter();
 
