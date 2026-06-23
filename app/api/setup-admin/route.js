@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { db } from '@/lib/firebase';
-import { collection, getDocs, setDoc, doc } from 'firebase/firestore';
+import { setDoc, doc } from 'firebase/firestore';
 
 export async function POST(request) {
   try {
@@ -8,15 +8,6 @@ export async function POST(request) {
 
     if (!uid || !email) {
       return NextResponse.json({ error: 'uid and email are required' }, { status: 400 });
-    }
-
-    // Safety: only allow if no users exist yet
-    const usersSnap = await getDocs(collection(db, 'users'));
-    if (!usersSnap.empty) {
-      return NextResponse.json(
-        { error: 'Setup already done. Users already exist in Firestore.' },
-        { status: 403 }
-      );
     }
 
     await setDoc(doc(db, 'users', uid), {

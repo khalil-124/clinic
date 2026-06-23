@@ -5,7 +5,7 @@ import { useState } from 'react';
 export default function SetupPage() {
   const [uid, setUid] = useState('');
   const [name, setName] = useState('د. محمد تيسير ذبالح');
-  const [email, setEmail] = useState('dr.mohammed@clinic.com');
+  const [email, setEmail] = useState('drmohammad@gmail.com');
   const [status, setStatus] = useState('');
   const [loading, setLoading] = useState(false);
   const [done, setDone] = useState(false);
