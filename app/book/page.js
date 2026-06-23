@@ -169,9 +169,29 @@ function PatientBookingForm() {
   return (
     <div className={styles.publicContainer}>
       <div className={styles.publicCard}>
-        <div className={styles.publicHeader}>
+        <div className={styles.publicHeader} style={{ position: 'relative' }}>
           <h1>🦷 عيادة د. محمد تيسير ذبالح</h1>
           <p className="subtitle">طلب حجز موعد جديد</p>
+          <a
+            href="/login"
+            style={{
+              position: 'absolute',
+              top: '0',
+              left: '0',
+              fontSize: '0.75rem',
+              color: 'var(--text-muted, #888)',
+              textDecoration: 'none',
+              padding: '6px 12px',
+              borderRadius: '6px',
+              border: '1px solid var(--border-color, #333)',
+              opacity: 0.6,
+              transition: 'opacity 0.2s',
+            }}
+            onMouseEnter={e => e.target.style.opacity = 1}
+            onMouseLeave={e => e.target.style.opacity = 0.6}
+          >
+            🔐 دخول الطاقم الطبي
+          </a>
         </div>
 
         <form onSubmit={handleSubmit} className={styles.publicForm}>
