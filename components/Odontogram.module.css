@@ -1,0 +1,133 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 16px;
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ── Chart container (holds SVG) ─── */
+.odontogramContainer {
+  position: relative;
+  width: 100%;
+  background: #ffffff;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.02);
+}
+
+.svgChart {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ── Hotspot rectangles ────────────────────────────── */
+.hotspot {
+  transition: fill 0.18s ease, stroke 0.18s ease, stroke-width 0.18s ease;
+}
+
+/* ── FDI tooth number labels ───────────────────────── */
+.fdiLabel {
+  font-family: var(--font-sans, 'Inter', sans-serif);
+  font-size: 14px;
+  font-weight: 700;
+  fill: #64748B;
+  text-anchor: middle;
+  dominant-baseline: central;
+  user-select: none;
+  pointer-events: none;
+  transition: fill 0.2s ease, font-size 0.2s ease;
+}
+
+.fdiActive {
+  fill: var(--primary-color, #3B82F6);
+  font-size: 16px;
+  font-weight: 800;
+}
+
+/* ── Legend ─────────────────────────────────────────── */
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 18px;
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border-color);
+  width: 100%;
+  direction: rtl;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.dot {
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  display: inline-block;
+  border: 1.5px solid transparent;
+  flex-shrink: 0;
+}
+
+.dotNormal {
+  background-color: #ffffff;
+  border-color: #94A3B8;
+}
+
+.dotCaries {
+  background-color: #FEE2E2;
+  border-color: #EF4444;
+}
+
+.dotFilled {
+  background-color: #FEF3C7;
+  border-color: #D97706;
+}
+
+.dotCrown {
+  background-color: #DBEAFE;
+  border-color: #3B82F6;
+}
+
+.dotMissing {
+  background-color: #94A3B8;
+  position: relative;
+}
+
+.dotMissing::after {
+  content: '×';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: bold;
+  line-height: 1;
+}
+
+.quadrantLabel {
+  font-family: var(--font-sans, 'Inter', sans-serif);
+  font-size: 13px;
+  font-weight: 800;
+  fill: #94A3B8;
+  text-anchor: middle;
+  dominant-baseline: central;
+  user-select: none;
+  pointer-events: none;
+}

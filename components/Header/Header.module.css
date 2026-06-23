@@ -1,0 +1,124 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: var(--sidebar-width);
+  height: var(--header-height);
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  z-index: 50;
+  transition: var(--transition-slow);
+}
+
+.headerRight {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.menuBtn {
+  display: none;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius);
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  color: var(--text);
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.menuBtn:hover {
+  background: var(--bg-hover);
+}
+
+.searchContainer {
+  position: relative;
+  max-width: 360px;
+  flex: 1;
+}
+
+.searchIcon {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  font-size: 16px;
+  pointer-events: none;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 10px 40px 10px 14px;
+  border: 2px solid var(--border);
+  border-radius: var(--radius-full);
+  background: var(--bg);
+  font-size: var(--font-size-sm);
+  transition: var(--transition);
+}
+
+.searchInput:focus {
+  border-color: var(--primary);
+  background: white;
+  box-shadow: 0 0 0 3px rgba(27, 73, 101, 0.1);
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.dateDisplay {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.logoutBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: var(--radius);
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  transition: var(--transition);
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.logoutBtn:hover {
+  background: var(--danger-bg);
+  color: var(--danger);
+}
+
+@media (max-width: 768px) {
+  .header {
+    right: 0;
+    padding: 0 16px;
+  }
+
+  .menuBtn {
+    display: flex;
+  }
+
+  .searchContainer {
+    display: none;
+  }
+
+  .dateDisplay {
+    display: none;
+  }
+}

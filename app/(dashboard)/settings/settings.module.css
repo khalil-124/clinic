@@ -1,0 +1,50 @@
+.settingsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.daysGrid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.dayBtn {
+  padding: 10px 4px;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  background: white;
+  font-weight: 600;
+  font-size: var(--font-size-xs);
+  cursor: pointer;
+  transition: var(--transition);
+  text-align: center;
+}
+
+.dayBtn:hover {
+  border-color: var(--primary);
+}
+
+.dayBtnActive {
+  background: var(--primary) !important;
+  color: white !important;
+  border-color: var(--primary) !important;
+}
+
+.saveRow {
+  display: flex;
+  gap: 16px;
+}
+
+@media (max-width: 768px) {
+  .settingsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .daysGrid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

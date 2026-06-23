@@ -1,0 +1,41 @@
+.filterBar {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.patientCell {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.patientAvatar {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius);
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: var(--font-size-lg);
+  flex-shrink: 0;
+}
+
+.patientName {
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .filterBar {
+    flex-direction: column;
+  }
+
+  .filterBar .search-box {
+    max-width: 100%;
+  }
+}

@@ -1,0 +1,330 @@
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.navButtons {
+  display: flex;
+  gap: 8px;
+}
+
+.viewToggle {
+  display: flex;
+  background: var(--bg);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.viewBtn {
+  padding: 8px 20px;
+  font-weight: 600;
+  font-size: var(--font-size-sm);
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: var(--transition);
+  color: var(--text-secondary);
+}
+
+.viewBtn:hover {
+  background: var(--bg-hover);
+}
+
+.viewBtnActive {
+  background: var(--primary) !important;
+  color: white !important;
+}
+
+/* Day Grid */
+.dayGrid {
+  display: flex;
+  flex-direction: column;
+}
+
+.timeRow {
+  display: flex;
+  border-bottom: 1px solid var(--border-light);
+  min-height: 64px;
+  transition: var(--transition);
+}
+
+.timeRow:last-child {
+  border-bottom: none;
+}
+
+.timeRow:hover {
+  background: var(--bg-hover);
+}
+
+.timeRowBooked {
+  background: white;
+}
+
+.timeLabel {
+  width: 90px;
+  padding: 16px;
+  font-weight: 600;
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  border-left: 1px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.timeContent {
+  flex: 1;
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+}
+
+.aptCard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px 16px;
+  background: white;
+  border-radius: var(--radius);
+  border: 1px solid var(--border-light);
+  border-right: 4px solid var(--primary);
+  box-shadow: var(--shadow-sm);
+}
+
+.aptCardInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.aptCardName {
+  font-weight: 700;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.aptCardName:hover {
+  color: var(--primary);
+}
+
+.aptCardMeta {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.aptStatusSelect {
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  border: none;
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.emptySlot {
+  color: var(--text-muted);
+  font-size: var(--font-size-sm);
+  opacity: 0;
+  transition: var(--transition);
+  text-decoration: none;
+}
+
+.timeRow:hover .emptySlot {
+  opacity: 1;
+}
+
+/* Month Grid */
+.monthGrid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  padding: 16px;
+}
+
+.monthHeader {
+  padding: 12px;
+  text-align: center;
+  font-weight: 700;
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+}
+
+.monthDay {
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: none;
+  cursor: pointer;
+  border-radius: var(--radius);
+  transition: var(--transition);
+  position: relative;
+}
+
+.monthDay:hover {
+  background: var(--bg-hover);
+}
+
+.monthDayOther {
+  opacity: 0.3;
+}
+
+.monthDayToday {
+  background: var(--primary) !important;
+  color: white !important;
+  font-weight: 700;
+}
+
+.dayNumber {
+  font-size: var(--font-size-base);
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .timeLabel {
+    width: 70px;
+    padding: 12px 8px;
+    font-size: var(--font-size-xs);
+  }
+
+  .aptCard {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .monthGrid {
+    padding: 8px;
+  }
+
+  .monthDay {
+    padding: 4px;
+  }
+}
+
+/* Two Column Layout */
+.appointmentsLayout {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.calendarCol {
+  flex: 1;
+  min-width: 0;
+}
+
+.pendingCol {
+  width: 320px;
+  flex-shrink: 0;
+  background: white;
+  padding: 16px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-sm);
+}
+
+.pendingRequestsTitle {
+  font-size: var(--font-size-base);
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 2px solid var(--border-light);
+  padding-bottom: 8px;
+}
+
+.pendingRequestCard {
+  background: var(--bg);
+  padding: 14px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 12px;
+  transition: var(--transition);
+}
+
+.pendingRequestCard:hover {
+  box-shadow: var(--shadow-sm);
+  background: var(--bg-hover);
+}
+
+.requestPatient {
+  font-weight: 700;
+  font-size: var(--font-size-sm);
+  color: var(--text);
+}
+
+.requestPatient a {
+  color: var(--primary);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.requestPatient a:hover {
+  text-decoration: underline;
+  opacity: 0.85;
+}
+
+.requestDetails {
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.requestActions {
+  display: flex;
+  gap: 8px;
+}
+
+.btnConfirm {
+  background: var(--success);
+  color: white;
+  flex: 1;
+  font-size: var(--font-size-xs);
+  padding: 6px 12px;
+}
+
+.btnConfirm:hover {
+  background: #27ae60;
+}
+
+.btnDecline {
+  background: var(--danger-bg);
+  color: var(--danger);
+  flex: 1;
+  font-size: var(--font-size-xs);
+  padding: 6px 12px;
+}
+
+.btnDecline:hover {
+  background: var(--danger);
+  color: white;
+}
+
+@media (max-width: 1024px) {
+  .appointmentsLayout {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .pendingCol {
+    width: 100%;
+  }
+}
+

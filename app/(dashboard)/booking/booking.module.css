@@ -1,0 +1,233 @@
+.bookingGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+/* Search Results */
+.searchResults {
+  background: white;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  margin-top: 8px;
+  max-height: 200px;
+  overflow-y: auto;
+  box-shadow: var(--shadow-md);
+}
+
+.searchResultItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 12px 16px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  transition: var(--transition);
+  text-align: right;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.searchResultItem:hover {
+  background: var(--bg-hover);
+}
+
+.searchResultItem:last-child {
+  border-bottom: none;
+}
+
+.resultName {
+  font-weight: 600;
+}
+
+.resultPhone {
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+  direction: ltr;
+}
+
+.newPatientBtn {
+  margin-top: 8px;
+  width: 100%;
+}
+
+/* Selected Patient */
+.selectedPatient {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  background: var(--success-bg);
+  border-radius: var(--radius);
+  border: 2px solid var(--success);
+}
+
+.selectedInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.selectedInfo strong {
+  font-size: var(--font-size-lg);
+}
+
+.selectedInfo span {
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+  direction: ltr;
+  text-align: right;
+}
+
+/* Patient Form */
+.patientForm {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Time Grid */
+.timeGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.timeSlot {
+  padding: 10px 8px;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  background: white;
+  font-weight: 600;
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+  transition: var(--transition);
+  text-align: center;
+}
+
+.timeSlot:hover:not(.timeSlotBooked) {
+  border-color: var(--primary);
+  background: var(--primary-50);
+}
+
+.timeSlotSelected {
+  background: var(--primary) !important;
+  color: white !important;
+  border-color: var(--primary) !important;
+  box-shadow: 0 2px 8px rgba(27, 73, 101, 0.3);
+}
+
+.timeSlotBooked {
+  background: var(--bg);
+  color: var(--text-muted);
+  cursor: not-allowed;
+  text-decoration: line-through;
+  opacity: 0.5;
+}
+
+/* Error */
+.errorBox {
+  padding: 14px 20px;
+  background: var(--danger-bg);
+  color: var(--danger);
+  border-radius: var(--radius);
+  font-weight: 600;
+  margin-bottom: 20px;
+  animation: fadeIn 0.3s ease;
+}
+
+/* Submit Row */
+.submitRow {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+/* Success */
+.successMessage {
+  text-align: center;
+  padding: 60px 24px;
+  animation: fadeInUp 0.5s ease;
+}
+
+.successIcon {
+  font-size: 64px;
+  margin-bottom: 16px;
+}
+
+.successMessage h2 {
+  font-size: var(--font-size-2xl);
+  color: var(--success);
+  margin-bottom: 12px;
+}
+
+.successMessage p {
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+
+@media (max-width: 768px) {
+  .bookingGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .timeGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .submitRow {
+    flex-direction: column;
+  }
+
+  .submitRow .btn {
+    width: 100%;
+  }
+}
+
+/* Voice Dictation Button styling */
+.voiceBtn {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  padding: 6px 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  transition: var(--transition);
+  color: var(--text-secondary);
+}
+
+.voiceBtn:hover {
+  background: var(--bg-hover);
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.voiceBtnListening {
+  background: var(--danger-bg) !important;
+  border-color: var(--danger) !important;
+  color: var(--danger) !important;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.4);
+  }
+  70% {
+    transform: scale(1.02);
+    box-shadow: 0 0 0 10px rgba(231, 76, 60, 0);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(231, 76, 60, 0);
+  }
+}
+
