@@ -10,6 +10,15 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // Register PWA service worker
+    if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').catch(err => {
+          console.error('Service worker registration failed:', err);
+        });
+      });
+    }
+
     const unsubscribe = onAuthChange((userData) => {
       setUser(userData);
       setLoading(false);
